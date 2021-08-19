@@ -1,0 +1,28 @@
+name: Aaron-sync   #Workflow名称
+on:
+  schedule:
+    - cron: '1 */3 * * *'    #定时
+  workflow_dispatch:
+  watch:
+    types: started
+  repository_dispatch:
+    types: sync-Aaron-lv-sync      #拉取的作者库路径
+jobs:
+  repo-sync:
+    env:
+      PAT: ${{ secrets.PAT }} 
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
+      - name: sync Aaron-lv/sync   #拉取的作者库路径
+        uses: repo-sync/github-sync@v2
+        if: env.PAT
+        with:
+          source_repo: "https://github.com/Aaron-lv/sync.git"    #拉取的作者库路径
+          source_branch: "jd_scripts"    #拉取作者文件分支名
+          destination_branch: "Aaron-lv"    #拉取文件同步分支名
+          github_token: ${{ secrets.PAT }}
