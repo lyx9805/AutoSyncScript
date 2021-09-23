@@ -3,7 +3,7 @@
 # @Time    : 2021/8/23 下午1:27
 # @Project : jd_scripts
 # @File    : jd_carnival_city.py
-# @Cron    : 0 22 * * *
+# @Cron    : 9 0 * * *
 # @Desc    : 京东APP首页->手机->手机嗨购日->一亿京豆悬浮窗, 10月2日结束
 import asyncio
 import json
