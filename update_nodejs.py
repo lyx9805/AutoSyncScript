@@ -14,8 +14,8 @@ def update():
     """
     :return:
     """
-    fake2 = 'https://github.com/shufflewzc/faker2.git'
-    hello = 'https://github.com/JDHelloWorld/jd_scripts'
+    fake2 = 'https://github.com.cnpmjs.org/shufflewzc/faker2.git'
+    hello = 'https://github.com.cnpmjs.org/JDHelloWorld/jd_scripts'
 
     if os.path.exists(JS_SCRIPTS_DIR):
         os.system('cd {};git reset --hard;git pull;'.format(JS_SCRIPTS_DIR))
