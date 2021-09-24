@@ -3,11 +3,11 @@
 # @Time    : 2021/9/22 3:32 下午
 # @File    : batch_run_js.py
 # @Project : jd_scripts
-# @Cron    : 6 6 * * *
+# @Cron    : 40 0,8,12,18 * * *
 # @Desc    : 批量执行JS脚本
 import multiprocessing
 import os
-from config import JS_REPO_LIST, JS_EXECUTE_LIST, BASE_DIR, PROCESS_NUM, JD_COOKIES
+from config import JS_SCRIPTS_DIR, PROCESS_NUM, JD_COOKIES
 from utils.cookie import export_cookie_env
 
 
@@ -16,19 +16,14 @@ def get_scripts():
     获取需要运行的JS脚本列表
     :return:
     """
-    script_list = []
-    for repo_name in JS_REPO_LIST.keys():
-        for item in JS_EXECUTE_LIST:
-            if os.path.exists(item):  # 绝对路径
-                script_list.append(item)
-            else:  # 相对路径
-                if not item.endswith('.js'):
-                    item += '.js'
-                script_path = os.path.join(BASE_DIR, f'{repo_name}/{item}')
-                if not os.path.exists(script_path):
-                    continue
-                script_list.append(script_path)
-        return script_list
+    res = []
+    for js_file in os.listdir(JS_SCRIPTS_DIR):
+        if js_file.startswith('jd') and js_file.endswith('.js') and 'Share' not in js_file:
+            path = os.path.join(JS_SCRIPTS_DIR, js_file)
+            if not os.path.exists(path):
+                continue
+            res.append(path)
+    return res
 
 
 def run(script_path):
