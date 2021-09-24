@@ -75,24 +75,3 @@ chrome_path: /usr/bin/chromium
 
 # 京东超市蓝币兑换物品,选项: 20, 1000, 或者其它商品唯一关键字, 默认20
 jd_supermarket_exchange: 20
-
-# 需要自动更新的JS仓库列表, 填写键值对。
-js_repo_list:
-  hello_scripts: https://github.com/JDHelloWorld/jd_scripts
-
-# 需要执行的js脚本列表
-js_execute_list:
-  - jd_yili_cow.js
-  - jd_bookshop.js
-  - jd_cfd.js
-  - jd_cfd_hb.js
-  - jd_cfd_loop.js
-  - jd_cfd_stock.js
-  - jd_cfd_withdraw.js
-  - jd_jin_tie.js
-  - jd_live.js
-  - jd_qq_pasture.js
-  - jd_redPacket.js
-  - jd_speed_redEnvelope.js
-  - jd_speed_redpocke.js
-  - jd_speed_sign.js
