@@ -1,4 +1,4 @@
-FROM python:3.7.11-slim-buster
+FROM nikolaik/python-nodejs:python3.7-nodejs14
 
 ENV CODE_DIR=/scripts
 
