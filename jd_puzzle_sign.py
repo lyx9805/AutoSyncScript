@@ -32,6 +32,14 @@ class JdPuzzleSign:
             println('{}, 打开{}页面失败, 无法签到!'.format(self.account, name))
             return
 
+        skip_button_selector = 'body'
+        try:
+            await page.waitForSelector(skip_button_selector, timeout=50000)
+            skip_button_ele = await page.querySelector(skip_button_selector)
+            await skip_button_ele.click()
+        except:
+            pass
+
         sign_button_selector = 'div.sign_btn'
 
         try:
@@ -181,10 +189,10 @@ class JdPuzzleSign:
         println('{}, 正在打开浏览器...'.format(self.account))
         browser = await open_browser()
 
-        await self.undies_sign(browser)  # 京东内衣
-        await asyncio.sleep(1)
-        await self.children_clothing_sign(browser)  # 京东童装
-        await asyncio.sleep(1)
+        # await self.undies_sign(browser)  # 京东内衣
+        # await asyncio.sleep(1)
+        # await self.children_clothing_sign(browser)  # 京东童装
+        # await asyncio.sleep(1)
         await self.baby_sign(browser)  # 母婴馆
         await asyncio.sleep(1)
         await self.digital_3C(browser)
