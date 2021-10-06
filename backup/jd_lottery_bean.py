@@ -39,7 +39,7 @@ class JdLotteryBean:
                '%3Dwc55025fHeyJnTGF0IjoiMjMuMDEzMTAxIiwiZ0xuZyI6IjExMy4zOTAwNTEifQ9%253D%253D%22%2C%22eid%22%3A' \
                '%22eidA032a81222asaKrq38pv1Smu4CcoLNmssuSq6uW5IaTgOUxBHdNSLeAQhYJKsAr1ni1FkoE84A3b0R3nbznVBN0H3IoNwfB' \
                '%2FfhJJsi5KY4w5KFphi%22%2C%22pageClickKey%22%3A%22Babel_WheelSurf%22%2C%22shshshfpb%22%3A%22zyIEXXcEj' \
-               '%2Bo%2FT7BgWolC5HlcQo72LyOIHBAzbP9RRfNACqMJteLVdK1iEgWcDupTqDWucyE3D5VfGTptpZEJCqw%3D%3D%22%7D%7D& '
+               '%2Bo%2FT7BgWolC5HlcQo72LyOIHBAzbP9RRfNACqMJteLVdK1iEgWcDupTqDWucyE3D5VfGTptpZEJCqw%3D%3D%22%7D%7D&'
         try:
             response = await session.post(url=url, data=body)
             text = await response.text()

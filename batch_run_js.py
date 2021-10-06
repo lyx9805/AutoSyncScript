@@ -18,7 +18,7 @@ def get_scripts():
     """
     res = []
     for js_file in os.listdir(JS_SCRIPTS_DIR):
-        if js_file.startswith('jd') and js_file.endswith('.js') and 'Share' not in js_file:
+        if js_file.endswith('.js') and 'Share' not in js_file:
             path = os.path.join(JS_SCRIPTS_DIR, js_file)
             if not os.path.exists(path):
                 continue

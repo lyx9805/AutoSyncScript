@@ -3,7 +3,7 @@
 # @Time    : 2021/9/17 5:32 下午
 # @File    : jd_enterprise_gift.py
 # @Project : jd_scripts
-# @Cron    : 40 8,22 15-30 * *
+# @Cron    : 40 8,22 * * *
 # @Desc    : 京东app->我的->签到领豆->边玩边赚->企有此礼
 
 from utils.jd_common import JdCommon
