@@ -164,7 +164,7 @@ class JdPuzzleSign:
         :param browser:
         :return:
         """
-        url = 'https://pro.m.jd.com/mall/active/3bhgbFe5HZcFCjEZf2jzp3umx4ZR/index.html'
+        url = 'https://pro.m.jd.com/mall/active/N9MpLQdxZgiczZaMx2SzmSfZSvF/index.html'
         name = 'plus天天领京豆'
         await self.sign(browser, url, name)
 
