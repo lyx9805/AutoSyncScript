@@ -3,6 +3,7 @@
 # @Time    : 2021/10/15 2:23 下午
 # @File    : jd_magic_cube.py
 # @Project : scripts
+# @Cron    : 37 5,22 * * *
 # @Desc    : 京东首页->新品首发->魔方
 import asyncio
 import json
