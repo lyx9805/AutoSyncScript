@@ -169,6 +169,12 @@ class JdTravels:
                 println('{}, 获取secretp失败, 退出程序!'.format(self.account))
                 return
             item_list = Code.get_code_list(CODE_KEY)
+            if self.sort < 1:
+                for item in item_list:
+                    if item['account'] == '作者':
+                        item_list.remove(item)
+                        item_list.insert(0, item)
+
             for item in item_list:
                 account, code = item.get('account'), item.get('code')
                 res = await self.request(session, 'travel_collectScore', {'inviteId': code}, is_ss=True)
@@ -178,6 +184,12 @@ class JdTravels:
                     break
 
             item_list = Code.get_code_list(GROUP_CODE_KEY)
+            if self.sort < 1:
+                for item in item_list:
+                    if item['account'] == '作者':
+                        item_list.remove(item)
+                        item_list.insert(0, item)
+
             for item in item_list:
                 account, code = item.get('account'), item.get('code')
                 res = await self.request(session, 'travel_pk_joinGroup', {
