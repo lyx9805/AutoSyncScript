@@ -91,6 +91,7 @@ class JdTravels:
             println('{}, 任务已完成...'.format(self.account))
             await self.travel_raise(session)
             await self.get_group_id(session)
+            await self.get_pk_award(session)
 
         if self.browser:
             await close_browser(self.browser)
@@ -120,7 +121,7 @@ class JdTravels:
             if res.get('bizCode', 999) == 0:
                 println('{}, 成功打卡一次!'.format(self.account))
             else:
-                println('{}, 打卡失败!'.format(self.account))
+                println('{}, 打卡失败, {}'.format(self.account, res))
                 break
             await asyncio.sleep(1)
 
@@ -436,6 +437,16 @@ class JdTravels:
                 'bizCode': 999,
                 'bizMsg': '无法获取服务器数据!'
             }
+
+    @logger.catch
+    async def get_pk_award(self, session):
+        """
+        pk领奖
+        """
+        import datetime
+        if datetime.datetime.now().hour >= 20:
+            res = await self.request(session, 'travel_pk_divideScores', is_ss=True)
+            println('{}, 组队PK领奖结果:{}'.format(self.account, res))
 
     @logger.catch
     async def get_ss(self):
