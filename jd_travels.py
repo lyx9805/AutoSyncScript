@@ -188,11 +188,15 @@ class JdTravels:
         if res.get('bizCode') != 0:
             println('{}, 获取任务失败！'.format(self.account))
             return
-        invite_id = res['result']['inviteId']
+        try:
+            invite_id = res['result']['inviteId']
+            println('{}, 邀请码:{}'.format(self.account, invite_id))
+            Code.insert_code(code_key=CODE_KEY, code_val=invite_id, sort=self.sort, account=self.account)
+        except Exception as e:
+            pass
         award_list = res['result']['lotteryTaskVos'][0]['badgeAwardVos']
         task_list = res['result']['taskVos']
-        println('{}, 邀请码:{}'.format(self.account, invite_id))
-        Code.insert_code(code_key=CODE_KEY, code_val=invite_id, sort=self.sort, account=self.account)
+
         for award in award_list:
             if award['status'] == 3:
                 res = await self.request(session, 'travel_getBadgeAward', {
@@ -332,6 +336,7 @@ class JdTravels:
                     if c > max_times:
                         break
 
+    @logger.catch
     async def collect_auto_score(self, session):
         """
         收金币
@@ -358,6 +363,7 @@ class JdTravels:
             result_cookies[cookie['name']] = cookie['value']
         return result_cookies
 
+    @logger.catch
     async def request(self, session, function_id, body=None, method='POST', is_ss=False):
         try:
             if body is None:
@@ -412,5 +418,8 @@ class JdTravels:
 
 
 if __name__ == '__main__':
+    # from config import JD_COOKIES
+    # app = JdTravels(**JD_COOKIES[0])
+    # asyncio.run(app.run())
     from utils.process import process_start
     process_start(JdTravels, name='热爱环游记', process_num=1, code_key=CODE_KEY, help=True)
