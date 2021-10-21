@@ -290,7 +290,6 @@ class JdTravelShopTask:
                 item_list = Code.get_code_list(code_key)
                 for item in item_list:
                     account, code = item.get('account'), item.get('code')
-                    println(json.loads(code))
                     res = await self.requestx(session, 'jm_task_process', json.loads(code))
                     if not res:
                         break
@@ -303,4 +302,4 @@ if __name__ == '__main__':
     # app = JdTravelShopTask(**JD_COOKIES[-1])
     # asyncio.run(app.run_help())
     from utils.process import process_start
-    process_start(JdTravelShopTask, '热爱环游记-逛店铺抽金币')
+    process_start(JdTravelShopTask, '热爱环游记-逛店铺抽金币', help=False)
