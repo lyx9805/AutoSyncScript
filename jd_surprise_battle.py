@@ -4,31 +4,31 @@
 # @Project : jd_scripts
 # @File    : jd_surprise_battle.py
 # @Cron    : 22 4,17 * * *
-# @Desc    : 汽车生活节
+# @Desc    : 惊喜大作战
 from utils.jd_common import JdCommon
 from config import USER_AGENT
 
-CODE_KEY = 'jd_car_live'
+CODE_KEY = 'jd_surprise_battle'
 
 
-class JdCarLive(JdCommon):
+class JdSurpriseBattle(JdCommon):
     """
     """
     code_key = CODE_KEY
 
-    appid = "1E1xRy6c"
+    appid = "1FV1VwKc"
 
     # 请求头
     headers = {
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Referer': 'https://h5.m.jd.com/babelDiy/Zeus/2FdCyR9rffxKUkMpQTP4WT4bArmL/index.html',
+        'Referer': 'https://h5.m.jd.com/',
         'User-Agent': USER_AGENT
     }
 
 
 if __name__ == '__main__':
     from utils.process import process_start
-    process_start(JdCarLive, '汽车生活节', code_key=CODE_KEY)
+    process_start(JdSurpriseBattle, '惊喜大作战', code_key=CODE_KEY)
 
     # from config import JD_COOKIES
     # import asyncio

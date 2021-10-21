@@ -182,7 +182,7 @@ class JdTravels:
                     "inviteId": code, "confirmFlag": "1"
                 }, is_ss=True)
                 println('{}, 加入好友:{}的组, 结果:{}'.format(self.account, account, res))
-                await asyncio.sleep(1)
+                await asyncio.sleep(2)
 
         if self.browser:
             await close_browser(self.browser)
@@ -300,7 +300,7 @@ class JdTravels:
         if res.get('bizCode') != 0:
             println('{}, 无法获取组ID!'.format(self.account))
             return
-        group_id = res.get('result', dict()).get('groupInfo', dict()).get('groupLoginInviteId', None)
+        group_id = res.get('result', dict()).get('groupInfo', dict()).get('groupJoinInviteId', None)
         if group_id:
             println('{}, 组ID：{}'.format(self.account, group_id))
             Code.insert_code(code_key=GROUP_CODE_KEY, account=self.account, sort=self.sort, code_val=group_id)
