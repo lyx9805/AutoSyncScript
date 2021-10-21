@@ -17,6 +17,7 @@ from utils.logger import logger
 from db.model import Code
 
 CODE_KEY = 'jd_travels'
+GROUP_CODE_KEY = 'jd_travels_group'
 
 
 @jd_init
@@ -89,6 +90,7 @@ class JdTravels:
                 await self.do_tasks(session)
             println('{}, 任务已完成...'.format(self.account))
             await self.travel_raise(session)
+            await self.get_group_id(session)
 
         if self.browser:
             await close_browser(self.browser)
@@ -171,10 +173,19 @@ class JdTravels:
                 account, code = item.get('account'), item.get('code')
                 res = await self.request(session, 'travel_collectScore', {'inviteId': code}, is_ss=True)
                 println('{}, 助力:{}, 结果:{}'.format(self.account, account, res))
+                await asyncio.sleep(1)
+
+            item_list = Code.get_code_list(GROUP_CODE_KEY)
+            for item in item_list:
+                account, code = item.get('account'), item.get('code')
+                res = await self.request(session, 'travel_pk_joinGroup', {
+                    "inviteId": code, "confirmFlag": "1"
+                }, is_ss=True)
+                println('{}, 加入好友:{}的组, 结果:{}'.format(self.account, account, res))
+                await asyncio.sleep(1)
 
         if self.browser:
             await close_browser(self.browser)
-
 
     @logger.catch
     async def do_tasks(self, session):
@@ -280,6 +291,20 @@ class JdTravels:
                 c += 1
                 if c >= max_times:
                     break
+
+    async def get_group_id(self, session):
+        """
+        获取组ID
+        """
+        res = await self.request(session, 'travel_pk_getHomeData')
+        if res.get('bizCode') != 0:
+            println('{}, 无法获取组ID!'.format(self.account))
+            return
+        group_id = res.get('result', dict()).get('groupInfo', dict()).get('groupLoginInviteId', None)
+        if group_id:
+            println('{}, 组ID：{}'.format(self.account, group_id))
+            Code.insert_code(code_key=GROUP_CODE_KEY, account=self.account, sort=self.sort, code_val=group_id)
+
 
     async def do_feed_tasks(self, session):
         """
@@ -422,4 +447,4 @@ if __name__ == '__main__':
     # app = JdTravels(**JD_COOKIES[0])
     # asyncio.run(app.run())
     from utils.process import process_start
-    process_start(JdTravels, name='热爱环游记', process_num=1, code_key=CODE_KEY, help=True)
+    process_start(JdTravels, name='热爱环游记', process_num=1, code_key=[CODE_KEY, GROUP_CODE_KEY], help=True)
