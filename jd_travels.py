@@ -174,6 +174,8 @@ class JdTravels:
                 res = await self.request(session, 'travel_collectScore', {'inviteId': code}, is_ss=True)
                 println('{}, 助力:{}, 结果:{}'.format(self.account, account, res))
                 await asyncio.sleep(1)
+                if res.get('bizCode') == 106:
+                    break
 
             item_list = Code.get_code_list(GROUP_CODE_KEY)
             for item in item_list:
@@ -183,6 +185,8 @@ class JdTravels:
                 }, is_ss=True)
                 println('{}, 加入好友:{}的组, 结果:{}'.format(self.account, account, res))
                 await asyncio.sleep(2)
+                if res.get('bizCode') == -2:
+                    break
 
         if self.browser:
             await close_browser(self.browser)
