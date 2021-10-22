@@ -3,7 +3,7 @@
 # @Time    : 2021/10/21 4:11 下午
 # @File    : jd_city_cash.py
 # @Project : scripts
-# @Cron    : 0 0,8 * * *
+# @Cron    : 0 1,18 * * *
 # @Desc    : 城城领现金
 import json
 import math
