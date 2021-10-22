@@ -111,6 +111,9 @@ class JdCityCash:
         data = await self.request(session, 'city_masterMainData')
         if data.get('bizCode') != 0:
             return None
+        status = data.get('result', dict()).get('masterData', dict()).get('actStatus', 1)
+        if status == 2:
+            await self.receive_cash(session, cash_type=4)
         return data.get('result', dict()).get('masterData', dict()).get('inviteId', dict())
 
     async def run(self):
